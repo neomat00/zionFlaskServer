@@ -1,0 +1,13 @@
+#!/bin/bash
+set -e
+
+echo "Starting Python server..."
+
+pip install virtualenv
+python3 -m virtualenv venv
+source venv/bin/activate
+pip install gunicorn
+pip install -r requirements.txt
+
+# OPENAI_API_KEY=$1 python3 app.py
+OPENAI_API_KEY=$1 python3 -m gunicorn app:app -w 4
